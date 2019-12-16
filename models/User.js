@@ -6,11 +6,26 @@ let User = new Schema({
         first: String,
         last: String
     },
-    dateJoined: Date,
+    dateJoined: {
+        type: Date,
+        default: new Date()
+    },
     students: [{
-        type: String
+        student: {
+            _id: {
+                type: String
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            colour: {
+                type: String
+            }
+        }
     }],
     activities: [{
+        _id: String,
         name: String,
         textContent: String,
         date: Date,
@@ -23,6 +38,6 @@ let User = new Schema({
             type: String
         }]
     }]
-})
+});
 
 module.exports = mongoose.model('User', User);
