@@ -11,18 +11,16 @@ let User = new Schema({
         default: new Date()
     },
     students: [{
-        student: {
             _id: {
-                type: String
+                type: Schema.Types.ObjectId
             },
             name: {
                 type: String,
                 required: true
             },
-            colour: {
+            color: {
                 type: String
             }
-        }
     }],
     activities: [{
         _id: String,
