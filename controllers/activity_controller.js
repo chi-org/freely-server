@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
 
-let getAllActivates = (req, res) => {
+export let getActivitiesByUser = (req, res) => {
   console.log('====================================');
   console.log("Get All Activity's");
   console.log('====================================');
@@ -16,7 +16,7 @@ let getAllActivates = (req, res) => {
   })
 };
 
-let getAllUsers = (req, res) => {
+export let getAllActivities = (req, res) => {
   console.log('====================================');
   console.log("Get All Users");
   console.log('====================================');
@@ -26,9 +26,14 @@ let getAllUsers = (req, res) => {
       res.status(500)
       res.send(error)
     } else {
-      res.json(data)
+      let activities = data.map(user => {
+        return {
+          user_id: user.id,
+          activities: user.activities
+        }
+      })
+      res.json(activities)
     }
   })
 }
 
-module.exports = {getAllActivates, getAllUsers};
