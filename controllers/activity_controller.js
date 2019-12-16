@@ -37,3 +37,15 @@ export let getAllActivities = (req, res) => {
   })
 }
 
+export let getActivitiesById = (req, res) => {
+  User.findById({_id: req.query.id}).exec((error, data) => {
+    console.log()
+    let activities = data.activities.map(act => {
+      if (act._id == req.query.actid) {
+        return act
+      }
+    })
+    res.json(activities)
+  })
+}
+
