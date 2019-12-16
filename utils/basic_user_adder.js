@@ -39,6 +39,15 @@ activities: [{
   dateCompleted: new Date(),
   students: ["Ben", "Bob"],
   assets: ["https://img.com", "https://img.com/2"]
+},{
+  _id: mongoose.Types.ObjectId(),
+  name: "House" + randomNum(),
+  textContent: "This is the house you need to clean :}",
+  date: new Date(),
+  dateCreated: new Date(),
+  dateCompleted: new Date(),
+  students: ["Bob", "Ben"],
+  assets: ["https://img.com", "https://img.com/2"]
 }]
 }
 

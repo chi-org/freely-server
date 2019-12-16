@@ -17,5 +17,6 @@ mongoose.connect(
 User.deleteMany().exec((err, res) => {
   if (!err) {
     console.log(res)
+    process.exit(0)
   }
 });

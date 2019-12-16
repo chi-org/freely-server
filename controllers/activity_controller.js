@@ -11,7 +11,7 @@ let getAllActivates = (req, res) => {
       res.status(500)
       res.send(error)
     } else {
-      res.json(data)
+      res.json(data.activities)
     }
   })
 };
@@ -20,7 +20,7 @@ let getAllUsers = (req, res) => {
   console.log('====================================');
   console.log("Get All Users");
   console.log('====================================');
-  User.find().exec((error, data) => {
+  User.find({}).exec((error, data) => {
     if (error) {
       console.error(error)
       res.status(500)
