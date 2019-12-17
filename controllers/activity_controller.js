@@ -38,13 +38,16 @@ export let getAllActivities = (req, res) => {
 }
 
 export let getActivitiesById = (req, res) => {
+  console.log('====================================');
+  console.log("Get Activitie Bt Id");
+  console.log('====================================');
   User.findById({_id: req.query.id}).exec((error, data) => {
-    console.log()
-    let activities = data.activities.map(act => {
-      if (act._id == req.query.actid) {
-        return act
+    let activities = null;
+    data.activities.forEach(activitie => {
+      if (activitie._id == req.query.activitieID) {
+        activities = activitie;
       }
-    })
+    });
     res.json(activities)
   })
 }
