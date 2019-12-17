@@ -23,7 +23,7 @@ let User = new Schema({
             }
     }],
     activities: [{
-        _id: String,
+        _id: Schema.Types.ObjectId,
         name: String,
         textContent: String,
         date: Date,
