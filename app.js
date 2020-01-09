@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const passport = require('passport')
@@ -19,6 +20,12 @@ mongoose.connect(
     }
 );
 
+app.use(cors({
+    credentials: true,
+    origin: function (origin, callback) {
+        callback (null, true)
+    }
+}));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
