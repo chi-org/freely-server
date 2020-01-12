@@ -18,7 +18,7 @@ export let getActivitiesByUser = (req, res) => {
 
 export let getAllActivities = (req, res) => {
   console.log('====================================');
-  console.log("Get All Users");
+  console.log("Get All Activities");
   console.log('====================================');
   User.find({}).exec((error, data) => {
     if (error) {
@@ -26,12 +26,14 @@ export let getAllActivities = (req, res) => {
       res.status(500)
       res.send(error)
     } else {
+      console.log(data)
       let activities = data.map(user => {
         return {
           user_id: user.id,
           activities: user.activities
         }
-      })
+      })[0]
+      console.log(activities)
       res.json(activities)
     }
   })
