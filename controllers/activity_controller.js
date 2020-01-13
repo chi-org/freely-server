@@ -53,7 +53,7 @@ export let createActivity = (req, res) => {
         if (err) {
           res.json({error: err})
         } else {
-          res.json({error: false, data: {...date}})
+          res.json({error: false, data: {...data}})
         }
       })
     }
