@@ -53,7 +53,7 @@ export let createActivity = (req, res) => {
         if (err) {
           res.json({error: err})
         } else {
-          res.json({error: false, data: {...data}})
+          res.json({error: false, data: data})
         }
       })
     }
@@ -62,5 +62,17 @@ export let createActivity = (req, res) => {
 
 
 export let deleteActivity = (req, res) => {
-
+  console.log('Delete Activity')
+  // console.log(req.body)
+  User.updateOne(
+      { _id: req.body.userId },
+      { $pull: { activities : { _id : req.body.deleteId } } },
+      { safe: true }, (err, doc) => {
+        if (err) {
+          console.log(err)
+          res.json({error: err})
+        } else {
+          res.json({error: false, data: doc})
+        }
+      });
 }
