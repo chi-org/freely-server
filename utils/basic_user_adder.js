@@ -20,6 +20,7 @@ let user = {
   first: "Cap" + randomNum(),
   last: "Lala" + randomNum()
 },
+  username: "Testuser" + randomNum(),
 dateJoined: new Date(),
 students: [{
   _id: mongoose.Types.ObjectId(),
