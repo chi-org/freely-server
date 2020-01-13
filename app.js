@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -24,17 +23,12 @@ mongoose.connect(
     }
 );
 
-<<<<<<< HEAD
-app.use(cors({
-=======
 app.use(CORS({
->>>>>>> master
     credentials: true,
     origin: function (origin, callback) {
         callback (null, true)
     }
 }));
-<<<<<<< HEAD
 
 app.use(session({
     secret: "Express is awesome",
@@ -48,8 +42,6 @@ app.use(session({
     })
 }));
 
-=======
->>>>>>> master
 app.use(cookieParser());
 app.use(bodyParser.json());
 
