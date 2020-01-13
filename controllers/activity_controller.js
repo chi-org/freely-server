@@ -76,3 +76,14 @@ export let deleteActivity = (req, res) => {
         }
       });
 }
+
+
+export let findUser = (req, res) => {
+  User.findOne({username: req.body.username}, (err, doc) => {
+    if (err) {
+      res.json({error: err})
+    } else {
+      res.json({error: false, data: doc})
+    }
+  })
+}
