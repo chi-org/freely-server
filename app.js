@@ -8,10 +8,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport')
 const authRouter = require('./router/auth_routes');
+const CORS = require('cors');
+
 
 
 mongoose.connect(
-    "mongodb://localhost/freely",
+    process.env.DBURL ? process.env.DBURL : "mongodb://localhost/freely",
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
         if (err) {
@@ -22,12 +24,17 @@ mongoose.connect(
     }
 );
 
+<<<<<<< HEAD
 app.use(cors({
+=======
+app.use(CORS({
+>>>>>>> master
     credentials: true,
     origin: function (origin, callback) {
         callback (null, true)
     }
 }));
+<<<<<<< HEAD
 
 app.use(session({
     secret: "Express is awesome",
@@ -41,8 +48,11 @@ app.use(session({
     })
 }));
 
+=======
+>>>>>>> master
 app.use(cookieParser());
 app.use(bodyParser.json());
+
 
 
 app.use('/API', require('./router/activity_router'));
