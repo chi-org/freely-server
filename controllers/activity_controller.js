@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 
 export let getActivitiesByUser = (req, res) => {
-  console.log("Get All Activity's");
-  User.findById({_id: req.query.id}).exec((error, data) => {
+  console.log("Get Activities By User");
+  User.findById({_id: req.body.id}).exec((error, data) => {
     if (error) {
       console.error(error)
       res.status(500)
@@ -14,24 +14,6 @@ export let getActivitiesByUser = (req, res) => {
   })
 };
 
-export let getAllActivities = (req, res) => {
-  console.log("Get All Users");
-  User.find({}).exec((error, data) => {
-    if (error) {
-      console.error(error)
-      res.status(500)
-      res.send(error)
-    } else {
-      let activities = data.map(user => {
-        return {
-          user_id: user.id,
-          activities: user.activities
-        }
-      })
-      res.json(activities)
-    }
-  })
-}
 
 export let getActivitiesById = (req, res) => {
   console.log("Get Activities By Id");
@@ -49,7 +31,7 @@ export let getActivitiesById = (req, res) => {
 
 export let createActivity = (req, res) => {
   console.log('Creating a new Activity')
-  console.log(req.body)
+  // console.log(req.body)
   User.findById({_id: req.body.userId}, (err, doc) => {
     console.log(doc)
     if (err) {
@@ -71,7 +53,7 @@ export let createActivity = (req, res) => {
         if (err) {
           res.json({error: err})
         } else {
-          res.json({error: false})
+          res.json({error: false, data: {...date}})
         }
       })
     }

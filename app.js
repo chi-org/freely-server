@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const CORS = require('cors');
 
 
 
@@ -22,6 +23,7 @@ mongoose.connect(
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(CORS())
 
 
 app.use('/API', require('./router/activity_router'));
