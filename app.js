@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const passport = require('passport')
 const authRouter = require('./router/auth_routes');
 
@@ -25,6 +27,18 @@ app.use(cors({
     origin: function (origin, callback) {
         callback (null, true)
     }
+}));
+
+app.use(session({
+    secret: "Express is awesome",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 60000
+    },
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
 }));
 
 app.use(cookieParser());

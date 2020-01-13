@@ -38,10 +38,20 @@ const register = function (req, res) {
   });
 }
 
+function activeUserSession(req,res) {
+  if(req.sessionID && req.user) {
+      res.status(200);
+      res.send(req.sessionID)
+  }
+  else {
+      res.sendStatus(403);
+  }
+}
 
 
 module.exports = {
   register,
   login: loginUser,
-  logout
+  logout,
+  activeUserSession
 };
