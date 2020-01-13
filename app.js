@@ -5,10 +5,12 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const passport = require('passport')
 const authRouter = require('./router/auth_routes');
+const CORS = require('cors');
+
 
 
 mongoose.connect(
-    "mongodb://localhost/freely",
+    process.env.DBURL ? process.env.DBURL : "mongodb://localhost/freely",
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
         if (err) {
@@ -22,6 +24,7 @@ mongoose.connect(
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(CORS())
 
 
 app.use('/API', require('./router/activity_router'));
