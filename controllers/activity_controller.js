@@ -59,3 +59,8 @@ export let createActivity = (req, res) => {
     }
   })
 }
+
+
+export let deleteActivity = (req, res) => {
+
+}
