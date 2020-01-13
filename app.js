@@ -5,8 +5,10 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 
+
+
 mongoose.connect(
-    "mongodb://localhost/freely",
+    process.env.NODE_ENV ? process.env.DBURL : "mongodb://localhost/freely",
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
         if (err) {
