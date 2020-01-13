@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 
 mongoose.connect(
-    process.env.NODE_ENV ? process.env.DBURL : "mongodb://localhost/freely",
+    process.env.DBURL ? process.env.DBURL : "mongodb://localhost/freely",
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
         if (err) {
