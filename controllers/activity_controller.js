@@ -38,13 +38,13 @@ export let createActivity = (req, res) => {
       res.send({error: err})
     } else {
       let activities = doc.activities
-      let {name, textContent, date, students, assets, dateCompleted} = req.body
+      let {name, textContent, date, students, assets, completed} = req.body
       let newActivity = {
         name: name,
         textContent: textContent,
         date: date,
         dateCreated: new Date(),
-        dateCompleted: dateCompleted ? new Date() : null,
+        dateCompleted: completed ? new Date() : null,
         students: students,
         assets: assets
       }
