@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 
 mongoose.connect(
-  "mongodb://localhost/freely",
+    process.env.DBURL ? process.env.DBURL : "mongodb://localhost/freely",
   { useNewUrlParser: true, useUnifiedTopology: true },
   err => {
       if (err) {
