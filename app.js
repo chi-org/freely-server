@@ -53,7 +53,7 @@ app.use(passport.session());
 // ALL ROUTES BELOW PLEASE
 
 app.use('/API', require('./router/activity_router'));
-app.use('/auth', require('./router/auth_routes'));
+app.use('/API/auth', require('./router/auth_routes'));
 
 // TEST ROUTE
 app.get('/', (req, res) => {
