@@ -23,15 +23,17 @@ mongoose.connect(
     }
 );
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-
 app.use(CORS({
     credentials: true,
     origin: function (origin, callback) {
         callback (null, true)
     }
 }));
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+
+
 
 app.use(session({
     secret: "Express is awesome",
