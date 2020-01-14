@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const passport = require('passport')
-const authRouter = require('./router/auth_routes');
+const passport = require('passport');
+const PORT = process.env.PORT || 3030;
 const CORS = require('cors');
 
 
@@ -22,6 +22,9 @@ mongoose.connect(
         }
     }
 );
+
+app.use(cookieParser());
+app.use(bodyParser.json());
 
 app.use(CORS({
     credentials: true,
@@ -42,21 +45,23 @@ app.use(session({
     })
 }));
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-
-
-
-app.use('/API', require('./router/activity_router'));
-
 require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
-const PORT = process.env.PORT || 3030;
 
+// ALL ROUTES BELOW PLEASE
 
-app.use('/auth', authRouter);
+app.use('/API', require('./router/activity_router'));
+app.use('/auth', require('./router/auth_routes'));
+
+// TEST ROUTE
+app.get('/', (req, res) => {
+    console.log('get on /');
+    console.log('req.session', req.session)
+    console.log('req.user', req.user)
+    res.send('got your request');
+})
 
 app.listen(PORT, () => {
     console.log('App is running on port: ' + PORT)
