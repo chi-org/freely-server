@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const passport = require('passport')
 const authRouter = require('./router/auth_routes');
 const CORS = require('cors');
@@ -27,6 +29,19 @@ app.use(CORS({
         callback (null, true)
     }
 }));
+
+app.use(session({
+    secret: "Express is awesome",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 60000
+    },
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}));
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 
