@@ -54,16 +54,19 @@ app.use(passport.session());
 
 // ALL ROUTES BELOW PLEASE
 
-app.use('/API', require('./router/activity_router'));
+
 app.use('/API/auth', require('./router/auth_routes'));
+app.use('/API/activities', require('./router/activity_router'));
+app.use("/API/students", require('./router/student_router'));
 
 // TEST ROUTE
 app.get('/', (req, res) => {
     console.log('get on /');
-    console.log('req.session', req.session)
-    console.log('req.user', req.user)
+    console.log('req.session', req.session);
+    console.log('req.user', req.user);
     res.send('got your request');
 })
+
 
 app.listen(PORT, () => {
     console.log('App is running on port: ' + PORT)
