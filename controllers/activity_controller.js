@@ -41,6 +41,7 @@ export let createActivity = (req, res) => {
       let activities = doc.activities
       let {name, textContent, date, students, assets, completed} = req.body
       let newActivity = {
+        _id: mongoose.Types.ObjectId(),
         name: name,
         textContent: textContent,
         date: date,
