@@ -6,5 +6,5 @@ router.get("/getActivitiesByUser", userAuthenticated, controller.getActivitiesBy
 router.get("/getActivitiesById", userAuthenticated, controller.getActivitiesById);
 router.post("/createActivity", userAuthenticated, controller.createActivity);
 router.delete("/deleteActivity", userAuthenticated, controller.deleteActivity)
-router.get("/findUser", controller.findUser)
+router.get("/findUser", userAuthenticated, controller.findUser)
 module.exports = router;
