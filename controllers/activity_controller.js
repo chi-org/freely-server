@@ -4,7 +4,7 @@ const User = require('../models/User');
 export let getActivitiesByUser = (req, res) => {
   console.log("Get Activities By User");
   // console.log(req.user)
-  User.findById({_id: req.user._id}).exec((error, data) => {
+  User.findOne({_id: req.user._id}).exec((error, data) => {
     if (error) {
       console.error(error)
       res.status(500)
@@ -18,7 +18,7 @@ export let getActivitiesByUser = (req, res) => {
 
 export let getActivitiesById = (req, res) => {
   console.log("Get Activities By Id");
-  User.findById({_id: req.user._id}).exec((error, data) => {
+  User.findOne({_id: req.user._id}).exec((error, data) => {
     let activities = null;
     data.activities.forEach(activity => {
       if (activity._id === req.body.activityId) {
@@ -33,7 +33,7 @@ export let getActivitiesById = (req, res) => {
 export let createActivity = (req, res) => {
   console.log('Creating a new Activity')
   // console.log(req.body)
-  User.findById({_id: req.user._id}, (err, doc) => {
+  User.findOne({_id: req.user._id}, (err, doc) => {
     console.log(doc)
     if (err) {
       res.send({error: err})
@@ -88,3 +88,4 @@ export let findUser = (req, res) => {
     }
   })
 }
+
