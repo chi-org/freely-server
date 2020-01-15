@@ -36,7 +36,7 @@ const register = function (req, res) {
       loginUser(req,res);
     }
   });
-}
+};
 
 function activeUserSession(req,res) {
   if(req.sessionID && req.user) {
