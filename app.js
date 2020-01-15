@@ -35,7 +35,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.use(session({
-    secret: "Express is awesome",
+    secret: "freely auth",
     resave: false,
     saveUninitialized: false,
     cookie: {
