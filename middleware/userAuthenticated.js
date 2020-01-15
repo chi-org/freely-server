@@ -5,4 +5,4 @@ export let userAuthenticated = (req, res, next) => {
     } else {
         res.sendStatus(403)
     }
-}
+};

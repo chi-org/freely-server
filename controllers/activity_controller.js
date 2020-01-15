@@ -6,11 +6,11 @@ export let getActivitiesByUser = (req, res) => {
   // console.log(req.user)
   User.findOne({_id: req.user._id}).exec((error, data) => {
     if (error) {
-      console.error(error)
-      res.status(500)
-      res.send(error)
+      console.error(error);
+      res.status(500);
+      res.send(error);
     } else {
-      res.json(data.activities)
+      res.json(data.activities);
     }
   })
 };
@@ -31,15 +31,15 @@ export let getActivitiesById = (req, res) => {
 
 
 export let createActivity = (req, res) => {
-  console.log('Creating a new Activity')
+  console.log('Creating a new Activity');
   // console.log(req.body)
   User.findOne({_id: req.user._id}, (err, doc) => {
-    console.log(doc)
+    console.log(doc);
     if (err) {
       res.send({error: err})
     } else {
-      let activities = doc.activities
-      let {name, textContent, date, students, assets, completed} = req.body
+      let activities = doc.activities;
+      let {name, textContent, date, students, assets, completed} = req.body;
       let newActivity = {
         _id: mongoose.Types.ObjectId(),
         name: name,
@@ -49,8 +49,8 @@ export let createActivity = (req, res) => {
         dateCompleted: completed ? new Date() : null,
         students: students,
         assets: assets
-      }
-      doc.activities = [...activities, newActivity]
+      };
+      doc.activities = [...activities, newActivity];
       doc.save((err, data) => {
         if (err) {
           res.json({error: err})
@@ -60,24 +60,25 @@ export let createActivity = (req, res) => {
       })
     }
   })
-}
+};
 
 
 export let deleteActivity = (req, res) => {
-  console.log('Delete Activity')
+  console.log('Delete Activity');
   // console.log(req.body)
   User.updateOne(
-      { _id: req.user._id },
-      { $pull: { activities : { _id : req.body.deleteId } } },
-      { safe: true }, (err, doc) => {
+      {_id: req.user._id},
+      {$pull: {activities: {_id: req.body.deleteId}}},
+      {safe: true}, (err, doc) => {
         if (err) {
-          console.log(err)
+          console.log(err);
           res.json({error: err})
         } else {
           res.json({error: false, data: doc})
         }
       });
-}
+};
+
 
 
 export let findUser = (req, res) => {
@@ -88,5 +89,5 @@ export let findUser = (req, res) => {
       res.json({error: false, data: doc})
     }
   })
-}
+};
 
