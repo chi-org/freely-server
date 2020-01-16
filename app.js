@@ -10,15 +10,16 @@ const PORT = process.env.PORT || 3030;
 const CORS = require('cors');
 
 
+const DB = process.env.DBURL ? process.env.DBURL : "mongodb://localhost/freely"
 
 mongoose.connect(
-    process.env.DBURL ? process.env.DBURL : "mongodb://localhost/freely",
+    DB,
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
         if (err) {
             console.log("Error: " + err);
         } else {
-            console.log("Connected to database");
+            console.log("Connected to database: " + DB);
         }
     }
 );
@@ -33,10 +34,8 @@ app.use(CORS({
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-
-
 app.use(session({
-    secret: "Express is awesome",
+    secret: "freely auth",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -47,25 +46,18 @@ app.use(session({
     })
 }));
 
+// Passport / Auth
+
 require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-// ALL ROUTES BELOW PLEASE
-
+// Routes
 
 app.use('/API/auth', require('./router/auth_routes'));
 app.use('/API/activities', require('./router/activity_router'));
 app.use("/API/students", require('./router/student_router'));
-
-// TEST ROUTE
-app.get('/', (req, res) => {
-    console.log('get on /');
-    console.log('req.session', req.session);
-    console.log('req.user', req.user);
-    res.send('got your request');
-})
 
 
 app.listen(PORT, () => {
