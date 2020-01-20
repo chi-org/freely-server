@@ -5,7 +5,6 @@ const User = require('../models/User');
 export let getStudents = (req, res) => {
     User.findOne({_id: req.user._id}, (err, doc) => {
         if (err) {
-            res.status(500);
             res.json({error: err});
         } else {
             res.json(doc.students)
@@ -16,7 +15,6 @@ export let getStudents = (req, res) => {
 export let newStudent = (req, res) => {
     User.updateOne({_id: req.user._id}, { $push: { students: {_id: mongoose.Types.ObjectId(), name: req.body.name, color: req.body.color}}}, (err, doc) => {
         if (err) {
-            res.status(500);
             res.json({error: err})
         } else {
             res.json(doc)
@@ -29,7 +27,7 @@ export let newStudent = (req, res) => {
 // Delete student
 
 export let deleteStudent = (req, res) => {
-    User.updateOne({_id: req.user._id}, { $pull: {students: {_id: req.body.deleteStudent}}}, (err, doc) => {
+    User.updateOne({_id: req.user._id}, { $pull: {students: {_id: req.body.deleteId}}}, {safe: true}, (err, doc) => {
         if (err) {
             res.json({error: err})
         } else {
