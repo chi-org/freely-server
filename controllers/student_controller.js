@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 
 export let getStudents = (req, res) => {
-    User.findById({_id: req.user._id}, (err, doc) => {
+    User.findOne({_id: req.user._id}, (err, doc) => {
         if (err) {
             res.status(500);
             res.json({error: err});
@@ -27,3 +27,13 @@ export let newStudent = (req, res) => {
 // Update student
 
 // Delete student
+
+export let deleteStudent = (req, res) => {
+    User.updateOne({_id: req.user._id}, { $pull: {students: {_id: req.body.deleteStudent}}}, (err, doc) => {
+        if (err) {
+            res.json({error: err})
+        } else {
+            res.json(doc)
+        }
+    })
+}
