@@ -5,6 +5,6 @@ import {userAuthenticated} from "../middleware/userAuthenticated";
 router.get("/getStudents", userAuthenticated,controller.getStudents);
 router.post("/newStudent", userAuthenticated, controller.newStudent);
 // update student
-// delete student
+router.delete("/deleteStudent", userAuthenticated, controller.deleteStudent)
 
 module.exports = router;
