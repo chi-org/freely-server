@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 
 export let getActivitiesByUser = (req, res) => {
-  console.log("Get Activities By User");
+  // console.log("Get Activities By User");
   // console.log(req.user)
   User.findOne({_id: req.user._id}).exec((error, data) => {
     if (error) {
@@ -90,4 +90,5 @@ export let findUser = (req, res) => {
     }
   })
 };
+
 

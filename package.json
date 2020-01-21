@@ -13,7 +13,7 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "jest": "^24.9.0",
+    "mocha": "^7.0.0",
     "mongoose": "^5.8.0",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
@@ -24,6 +24,7 @@
     "eslint": "^6.7.2"
   },
   "scripts": {
+    "test": "mocha --require esm",
     "start": "node -r esm app.js",
     "dev": "nodemon -r esm app.js"
   }
