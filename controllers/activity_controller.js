@@ -34,33 +34,39 @@ export let getActivityById = (req, res) => {
 export let createActivity = (req, res) => {
   // console.log('Creating a new Activity');
   // console.log(req.body)
-  User.findOne({_id: req.user._id}, (err, doc) => {
-    // console.log(doc);
-    if (err) {
-      res.send({error: err})
-    } else {
-      let activities = doc.activities;
-      let {name, textContent, date, students, assets, completed} = req.body;
-      let newActivity = {
-        _id: mongoose.Types.ObjectId(),
-        name: name,
-        textContent: textContent,
-        date: date,
-        dateCreated: new Date(),
-        dateCompleted: completed ? new Date() : null,
-        students: students,
-        assets: assets
-      };
-      doc.activities = [...activities, newActivity];
-      doc.save((err, data) => {
-        if (err) {
-          res.json({error: err})
-        } else {
+  let {name, textContent, date, students, assets, completed} = req.body;
+  if (textContent) {
+    User.findOne({_id: req.user._id}, (err, doc) => {
+      // console.log(doc);
+      if (err) {
+        res.send({error: err})
+      } else {
+        let activities = doc.activities;
+        let newActivity = {
+          _id: mongoose.Types.ObjectId(),
+          name: name,
+          textContent: textContent,
+          date: date,
+          dateCreated: new Date(),
+          dateCompleted: completed ? new Date() : null,
+          students: students,
+          assets: assets
+        };
+        doc.activities = [...activities, newActivity];
+        doc.save((err, data) => {
+          if (err) {
+            res.json({error: err})
+          } else {
             res.json({ error: false, data: newActivity })
-        }
-      })
-    }
-  })
+          }
+        })
+      }
+    })
+  } else {
+    res.status(500);
+    res.json({error: "Missing data"});
+
+  }
 };
 
 
@@ -89,17 +95,22 @@ export let updateActivity = (req, res) => {
 
 export let deleteActivity = (req, res) => {
   console.log('Delete Activity');
-  User.updateOne(
-      {_id: req.user._id},
-      {$pull: {activities: {_id: req.body.deleteId}}},
-      {safe: true}, (err, doc) => {
-        if (err) {
-          // console.log(err);
-          res.json({error: err})
-        } else {
-          res.json({error: false, data: doc})
-        }
-      });
+  if (req.body.deleteId) {
+    User.updateOne(
+        {_id: req.user._id},
+        {$pull: {activities: {_id: req.body.deleteId}}},
+        {safe: true}, (err, doc) => {
+          if (err) {
+            // console.log(err);
+            res.json({error: err})
+          } else {
+            res.json({error: false, data: doc})
+          }
+        });
+  } else {
+    res.status(500);
+    res.json({error: "Delete ID"});
+  }
 };
 
 
