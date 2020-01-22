@@ -6,7 +6,9 @@ export let getActivitiesByUser = (req, res) => {
   User.findOne({_id: req.user._id}, (err, doc) => {
     if (err) {
       res.json({error: err})
-    } res.json(doc.activities)
+    } else {
+      res.json(doc.activities)
+    }
   })
 };
 
@@ -30,10 +32,10 @@ export let getActivityById = (req, res) => {
 
 
 export let createActivity = (req, res) => {
-  console.log('Creating a new Activity');
+  // console.log('Creating a new Activity');
   // console.log(req.body)
   User.findOne({_id: req.user._id}, (err, doc) => {
-    console.log(doc);
+    // console.log(doc);
     if (err) {
       res.send({error: err})
     } else {
@@ -92,7 +94,7 @@ export let deleteActivity = (req, res) => {
       {$pull: {activities: {_id: req.body.deleteId}}},
       {safe: true}, (err, doc) => {
         if (err) {
-          console.log(err);
+          // console.log(err);
           res.json({error: err})
         } else {
           res.json({error: false, data: doc})
@@ -111,4 +113,5 @@ export let findUser = (req, res) => {
     }
   })
 };
+
 
