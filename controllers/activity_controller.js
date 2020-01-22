@@ -88,12 +88,7 @@ export let updateActivity = (req, res) => {
 
 
 export let deleteActivity = (req, res) => {
-<<<<<<< HEAD
-  // console.log('Delete Activity');
-  // console.log(req.body)
-=======
   console.log('Delete Activity');
->>>>>>> master
   User.updateOne(
       {_id: req.user._id},
       {$pull: {activities: {_id: req.body.deleteId}}},
