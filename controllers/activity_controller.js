@@ -31,10 +31,10 @@ export let getActivitiesById = (req, res) => {
 
 
 export let createActivity = (req, res) => {
-  console.log('Creating a new Activity');
+  // console.log('Creating a new Activity');
   // console.log(req.body)
   User.findOne({_id: req.user._id}, (err, doc) => {
-    console.log(doc);
+    // console.log(doc);
     if (err) {
       res.send({error: err})
     } else {
@@ -64,14 +64,14 @@ export let createActivity = (req, res) => {
 
 
 export let deleteActivity = (req, res) => {
-  console.log('Delete Activity');
+  // console.log('Delete Activity');
   // console.log(req.body)
   User.updateOne(
       {_id: req.user._id},
       {$pull: {activities: {_id: req.body.deleteId}}},
       {safe: true}, (err, doc) => {
         if (err) {
-          console.log(err);
+          // console.log(err);
           res.json({error: err})
         } else {
           res.json({error: false, data: doc})
