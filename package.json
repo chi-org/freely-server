@@ -7,12 +7,14 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "mocha": "^7.0.0",
     "mongoose": "^5.8.0",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
@@ -23,6 +25,7 @@
     "eslint": "^6.7.2"
   },
   "scripts": {
+    "test": "mocha --require esm",
     "start": "node -r esm app.js",
     "dev": "nodemon -r esm app.js"
   }
